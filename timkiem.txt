@@ -1,0 +1,43 @@
+  <div class="container-fullwidth" style="padding-top:5%;">
+        <?php
+        session_start();
+        include('./php/header.php');
+        $keyword = $_POST['keyword'];
+        ?>
+        <main class="">
+                <div class="">
+                    <h4>Kết quả tìm kiếm cho '<?php echo $keyword?>'</h4>
+                <hr>
+        <div class="">
+            <div id="home" class="" style="background:#eee"><br>
+            <div class="">
+                <ul id="listruou" class="p-0" style="list-style:none;">
+                <?php
+                    require('./php/connect.php');
+                    $sql = "SELECT * FROM ruou WHERE ruou like '%$keyword%'";
+                    $result = mysqli_query($con,$sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        $ruou = $row['ruou'];
+                        $anh = $row['image'];
+                        $dungcu = $row['dungcu'];
+                        echo '<li><a href="./ruou.php?id='.$row['id'].'" class="">
+                            <span>
+                                <img class="" src="./'.$anh.'" width="50px">
+                            </span>
+                            <div class="">'.$ruou.'</div>
+                            <div class="">
+                                <span class="">
+                                    <span style="font-size:13px;">'.$dungcu.'</span>
+                                </span>
+                            </div>
+                        </a></li>';
+                    }
+                    mysqli_close($con);
+                ?>
+                </ul>
+                </div>
+            </div>
+          
+        </div>
+                
+            </div>
